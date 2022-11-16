@@ -19,8 +19,12 @@ public class tests_of_form {
         $("#dateOfBirthInput").click();
         $("[aria-label=\"Choose Thursday, November 10th, 2022\"]").click();
         $("#subjectsContainer").click();
-        $("#subjectsContainer").setValue("c");
+        $("#subjectsContainer #subjectsInput" ).setValue("Chemistry").pressEnter();
 
+        $("[for=\"hobbies-checkbox-1\"]").click();
+        $("#uploadPicture").scrollIntoView(true);
+        $("#uploadPicture").doubleClick();
+        $("#uploadPicture").setValue("Screenshot_1.jpg");
 
 
         //$("#dateOfBirthInput").setValue("01.01.23");
