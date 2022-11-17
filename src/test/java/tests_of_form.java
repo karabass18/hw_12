@@ -35,37 +35,47 @@ public class tests_of_form {
         open("https://demoqa.com/automation-practice-form");
         $("#firstName").setValue(userName);
         $("#lastName").setValue(userLastName);
-        $("#userEmail").setValue("vania@vania.com");
-        $("#gender-radio-3").doubleClick();
+        $("#userEmail").setValue(userEmail);
+       // $("#gender-radio-3").doubleClick();
 
-        $("#userNumber").setValue("1234567890");
+        $("[name = 'gender']" + "[value = " + userGen + "]").doubleClick();
+
+        $("#userNumber").setValue(userPhone);
         $("#dateOfBirthInput").click();
-        //$("[aria-label=\"Choose Thursday, December 10th, 2010\"]").click();
         $(".react-datepicker__month-select").click();
-        $(".react-datepicker__month-select").selectOption("May");
+        $(".react-datepicker__month-select").selectOption(userBDMonth);
         $(".react-datepicker__year-select").click();
-        //$(".react-datepicker__year-select byText(\"1913\")").scrollTo();
-        $(".react-datepicker__year-select").selectOption("1913");
+        $(".react-datepicker__year-select").selectOption(userBDYear);
         $(".react-datepicker__year-select").click();
-        $(".react-datepicker__day--0" + "01").click();
+        $(".react-datepicker__day--0" + userBDDay).click();
         $("#subjectsContainer").click();
         $("#uploadPicture").scrollIntoView(true);
-        $("#subjectsContainer #subjectsInput" ).setValue("Chemistry").pressEnter();
+        $("#subjectsContainer #subjectsInput" ).setValue(userSubj).pressEnter();
+        //$("[for=\"hobbies-checkbox-1\"]").click();
 
-        $("[for=\"hobbies-checkbox-1\"]").click();
+        //$(".custom-control-label ").
+                $(byText(userHobb)).click();
 
         //$("#uploadPicture").doubleClick();
-        $("#uploadPicture").uploadFile(new File("src/test/files/squid-game-anime.jpg"));
-        $("#currentAddress").setValue("Home Street");
+        $("#uploadPicture").uploadFile(new File(picPath + picName));
+        $("#currentAddress").setValue(userAdd);
         $("#submit").scrollIntoView(true);
 
         $("#state ").click();
-        $(byText("Haryana")).click();
+        $(byText(userState)).click();
         $("#city ").click();
-        $(byText("Karnal")).click();
+        $(byText(userCity)).click();
         $("#submit").click();
         //$(".table-dark.")
-        $("tr:nth-child(2) td:nth-child(2)").shouldHave(text("vania@vania.com"));
-        //$("#dateOfBirthInput").setValue("01.01.23");
+        $("tr:nth-child(1) td:nth-child(2)").shouldHave(text(userName + " " + userLastName));
+        $("tr:nth-child(2) td:nth-child(2)").shouldHave(text(userEmail));
+        $("tr:nth-child(3) td:nth-child(2)").shouldHave(text(userGen));
+        $("tr:nth-child(4) td:nth-child(2)").shouldHave(text(userPhone));
+        $("tr:nth-child(5) td:nth-child(2)").shouldHave(text(userBDDay + " " + userBDMonth + "," + userBDYear));
+        $("tr:nth-child(6) td:nth-child(2)").shouldHave(text(userSubj));
+        $("tr:nth-child(7) td:nth-child(2)").shouldHave(text(userHobb));
+        $("tr:nth-child(8) td:nth-child(2)").shouldHave(text(picName));
+        $("tr:nth-child(9) td:nth-child(2)").shouldHave(text(userAdd));
+        $("tr:nth-child(10) td:nth-child(2)").shouldHave(text(userState + " " + userCity));
     }
 }
