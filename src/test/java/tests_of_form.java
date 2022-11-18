@@ -3,7 +3,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
-import static com.codeborne.selenide.Condition.selected;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
@@ -31,15 +30,11 @@ public class tests_of_form {
         String userState = "Haryana";
         String userCity = "Karnal";
 
-
         open("https://demoqa.com/automation-practice-form");
         $("#firstName").setValue(userName);
         $("#lastName").setValue(userLastName);
         $("#userEmail").setValue(userEmail);
-       // $("#gender-radio-3").doubleClick();
-
         $("[name = 'gender']" + "[value = " + userGen + "]").doubleClick();
-
         $("#userNumber").setValue(userPhone);
         $("#dateOfBirthInput").click();
         $(".react-datepicker__month-select").click();
@@ -51,22 +46,16 @@ public class tests_of_form {
         $("#subjectsContainer").click();
         $("#uploadPicture").scrollIntoView(true);
         $("#subjectsContainer #subjectsInput" ).setValue(userSubj).pressEnter();
-        //$("[for=\"hobbies-checkbox-1\"]").click();
-
-        //$(".custom-control-label ").
-                $(byText(userHobb)).click();
-
-        //$("#uploadPicture").doubleClick();
+        $("#hobbiesWrapper").$(byText(userHobb)).click();
         $("#uploadPicture").uploadFile(new File(picPath + picName));
         $("#currentAddress").setValue(userAdd);
         $("#submit").scrollIntoView(true);
-
         $("#state ").click();
         $(byText(userState)).click();
         $("#city ").click();
         $(byText(userCity)).click();
         $("#submit").click();
-        //$(".table-dark.")
+
         $("tr:nth-child(1) td:nth-child(2)").shouldHave(text(userName + " " + userLastName));
         $("tr:nth-child(2) td:nth-child(2)").shouldHave(text(userEmail));
         $("tr:nth-child(3) td:nth-child(2)").shouldHave(text(userGen));
