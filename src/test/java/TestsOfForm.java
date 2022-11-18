@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
-public class tests_of_form {
+public class TestsOfForm {
 @Test
     void fillFormTest() {
         Configuration.holdBrowserOpen= true;
@@ -24,7 +24,7 @@ public class tests_of_form {
         String userBDYear = "1913";
         String userSubj = "Chemistry";
         String userHobb = "Sports";
-        String picPath = "src/test/files/";
+        String picPath = "src/test/resources/";
         String picName = "squid-game-anime.jpg";
         String userAdd = "Home Street";
         String userState = "Haryana";
