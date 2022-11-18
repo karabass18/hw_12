@@ -1,4 +1,5 @@
 import com.codeborne.selenide.Configuration;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -9,11 +10,14 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 public class TestsOfForm {
-@Test
-    void fillFormTest() {
-        Configuration.holdBrowserOpen= true;
-        Configuration.browserSize = "780x1080";
+    @BeforeAll
+    static void beforeAll() {
+        Configuration.holdBrowserOpen = true;
+        Configuration.browserSize = "720x1080";
+    }
 
+    @Test
+    void fillFormTest() {
         String userName = "Vania";
         String userLastName = "Ivanov";
         String userEmail = "vania@vania.com";
@@ -45,7 +49,7 @@ public class TestsOfForm {
         $(".react-datepicker__day--0" + userBDDay).click();
         $("#subjectsContainer").click();
         $("#uploadPicture").scrollIntoView(true);
-        $("#subjectsContainer #subjectsInput" ).setValue(userSubj).pressEnter();
+        $("#subjectsContainer #subjectsInput").setValue(userSubj).pressEnter();
         $("#hobbiesWrapper").$(byText(userHobb)).click();
         $("#uploadPicture").uploadFile(new File(picPath + picName));
         $("#currentAddress").setValue(userAdd);
@@ -56,15 +60,10 @@ public class TestsOfForm {
         $(byText(userCity)).click();
         $("#submit").click();
 
-        $("tr:nth-child(1) td:nth-child(2)").shouldHave(text(userName + " " + userLastName));
-        $("tr:nth-child(2) td:nth-child(2)").shouldHave(text(userEmail));
-        $("tr:nth-child(3) td:nth-child(2)").shouldHave(text(userGen));
-        $("tr:nth-child(4) td:nth-child(2)").shouldHave(text(userPhone));
-        $("tr:nth-child(5) td:nth-child(2)").shouldHave(text(userBDDay + " " + userBDMonth + "," + userBDYear));
-        $("tr:nth-child(6) td:nth-child(2)").shouldHave(text(userSubj));
-        $("tr:nth-child(7) td:nth-child(2)").shouldHave(text(userHobb));
-        $("tr:nth-child(8) td:nth-child(2)").shouldHave(text(picName));
-        $("tr:nth-child(9) td:nth-child(2)").shouldHave(text(userAdd));
-        $("tr:nth-child(10) td:nth-child(2)").shouldHave(text(userState + " " + userCity));
+        $(".modal-header").shouldHave(text("Thanks for submitting the form"));
+        $(".modal-body").shouldHave(text(userName + " " + userLastName), text(userEmail), text(userGen),
+                text(userPhone), text(userBDDay + " " + userBDMonth + "," + userBDYear), text(userSubj), text(userHobb), text(picName), text(userAdd),
+                text(userState + " " + userCity));
+
     }
 }
