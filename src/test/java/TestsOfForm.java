@@ -1,3 +1,4 @@
+import Pages.FormPage;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -9,12 +10,8 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
-public class TestsOfForm {
-    @BeforeAll
-    static void beforeAll() {
-        Configuration.holdBrowserOpen = true;
-        Configuration.browserSize = "720x1080";
-    }
+public class TestsOfForm extends StartsSet {
+
 
     @Test
     void fillFormTest() {
@@ -35,20 +32,14 @@ public class TestsOfForm {
         String userCity = "Karnal";
 
         open("https://demoqa.com/automation-practice-form");
-        $("#firstName").setValue(userName);
-        $("#lastName").setValue(userLastName);
-        $("#userEmail").setValue(userEmail);
-        $("[name = 'gender']" + "[value = " + userGen + "]").doubleClick();
-        $("#userNumber").setValue(userPhone);
-        $("#dateOfBirthInput").click();
-        $(".react-datepicker__month-select").click();
-        $(".react-datepicker__month-select").selectOption(userBDMonth);
-        $(".react-datepicker__year-select").click();
-        $(".react-datepicker__year-select").selectOption(userBDYear);
-        $(".react-datepicker__year-select").click();
-        $(".react-datepicker__day--0" + userBDDay).click();
+        new FormPage().setFirstName(userName)
+                .setLastName(userLastName)
+                .setEmail(userEmail)
+                .setGen(userGen)
+                .setPhone((userPhone))
+                .setBDay(userBDDay, userBDMonth, userBDYear);
         $("#subjectsContainer").click();
-        $("#uploadPicture").scrollIntoView(true);
+       // $("#uploadPicture").scrollIntoView(true);
         $("#subjectsContainer #subjectsInput").setValue(userSubj).pressEnter();
         $("#hobbiesWrapper").$(byText(userHobb)).click();
         $("#uploadPicture").uploadFile(new File(picPath + picName));
@@ -56,14 +47,13 @@ public class TestsOfForm {
         $("#submit").scrollIntoView(true);
         $("#state ").click();
         $(byText(userState)).click();
+
         $("#city ").click();
         $(byText(userCity)).click();
         $("#submit").click();
-
-        $(".modal-header").shouldHave(text("Thanks for submitting the form"));
-        $(".modal-body").shouldHave(text(userName + " " + userLastName), text(userEmail), text(userGen),
-                text(userPhone), text(userBDDay + " " + userBDMonth + "," + userBDYear), text(userSubj), text(userHobb), text(picName), text(userAdd),
-                text(userState + " " + userCity));
+        new FormPage().checkRegistrResultTabAppear()
+                .checkRegistrResult("Student Name", userName + " " + userLastName);
+        $(".modal-body").shouldHave(text(userName + " " + userLastName), text(userEmail), text(userGen), text(userPhone), text(userBDDay + " " + userBDMonth + "," + userBDYear), text(userSubj), text(userHobb), text(picName), text(userAdd), text(userState + " " + userCity));
 
     }
 }
