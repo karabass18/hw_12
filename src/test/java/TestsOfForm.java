@@ -1,13 +1,6 @@
 import Pages.FormPage;
-import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 public class TestsOfForm extends StartsSet {
@@ -31,29 +24,33 @@ public class TestsOfForm extends StartsSet {
         String userState = "Haryana";
         String userCity = "Karnal";
 
-        open("https://demoqa.com/automation-practice-form");
-        new FormPage().setFirstName(userName)
+        new FormPage().openForm()
+                .setFirstName(userName)
                 .setLastName(userLastName)
                 .setEmail(userEmail)
                 .setGen(userGen)
                 .setPhone((userPhone))
-                .setBDay(userBDDay, userBDMonth, userBDYear);
-        $("#subjectsContainer").click();
-       // $("#uploadPicture").scrollIntoView(true);
-        $("#subjectsContainer #subjectsInput").setValue(userSubj).pressEnter();
-        $("#hobbiesWrapper").$(byText(userHobb)).click();
-        $("#uploadPicture").uploadFile(new File(picPath + picName));
-        $("#currentAddress").setValue(userAdd);
-        $("#submit").scrollIntoView(true);
-        $("#state ").click();
-        $(byText(userState)).click();
+                .setBDay(userBDDay, userBDMonth, userBDYear)
+                .setSubj(userSubj)
+                .setHobby(userHobb)
+                .uploadPic(picPath + picName)
+                .setAddress(userAdd)
+                .setState(userState)
+                .setCity(userCity)
+                .submitInfo();
 
-        $("#city ").click();
-        $(byText(userCity)).click();
-        $("#submit").click();
+
         new FormPage().checkRegistrResultTabAppear()
-                .checkRegistrResult("Student Name", userName + " " + userLastName);
-        $(".modal-body").shouldHave(text(userName + " " + userLastName), text(userEmail), text(userGen), text(userPhone), text(userBDDay + " " + userBDMonth + "," + userBDYear), text(userSubj), text(userHobb), text(picName), text(userAdd), text(userState + " " + userCity));
+                .checkRegistrResult("Student Name", userName + " " + userLastName)
+                .checkRegistrResult("Student Email", userEmail)
+                .checkRegistrResult("Gender", userGen)
+                .checkRegistrResult("Mobile", userPhone)
+                .checkRegistrResult("Date of Birth", userBDDay + " " + userBDMonth + "," + userBDYear)
+                .checkRegistrResult("Subjects", userSubj)
+                .checkRegistrResult("Hobbies", userHobb)
+                .checkRegistrResult("Picture", picName)
+                .checkRegistrResult("Address", userAdd)
+                .checkRegistrResult("State and City", userState + " " + userCity);
 
     }
 }

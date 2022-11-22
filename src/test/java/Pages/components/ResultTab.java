@@ -1,7 +1,5 @@
 package Pages.components;
 
-import com.codeborne.selenide.selector.ByText;
-
 import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
