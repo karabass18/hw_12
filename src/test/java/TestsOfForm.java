@@ -49,7 +49,7 @@ public class TestsOfForm extends StartsSet {
 
         step("Check the result", () -> {
             formPage.checkRegistrResultTabAppear()
-                    .checkRegistrResult("Student Name", userName + " " + userLastName+"44")
+                    .checkRegistrResult("Student Name", userName + " " + userLastName)
                     .checkRegistrResult("Student Email", userEmail)
                     .checkRegistrResult("Gender", userGen)
                     .checkRegistrResult("Mobile", userPhone)
