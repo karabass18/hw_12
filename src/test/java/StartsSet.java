@@ -9,8 +9,8 @@ public class StartsSet {
 
         //Configuration.holdBrowserOpen = true;
         Configuration.browserSize = "720x800";
-       // Configuration.timeout = 10000;
-        //Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+
+        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
         SelenideLogger.addListener("allure", new AllureSelenide());
     }
 }
