@@ -1,13 +1,9 @@
 import Pages.FormPage;
-import com.codeborne.selenide.logevents.SelenideLogger;
-import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
 
 public class TestsOfForm extends StartsSet {
-
 
     @Test
     void fillFormTest() {
@@ -30,39 +26,39 @@ public class TestsOfForm extends StartsSet {
         FormPage formPage = new FormPage();
 
 
-        step("Open the form", () ->{
+        step("Open the form", () -> {
 
-        formPage.openForm();
+            formPage.openForm();
         });
 
         step("Fill the form", () -> {
-        formPage.setFirstName(userName)
-                .setLastName(userLastName)
-                .setEmail(userEmail)
-                .setGen(userGen)
-                .setPhone((userPhone))
-                .setBDay(userBDDay, userBDMonth, userBDYear)
-                .setSubj(userSubj)
-                .setHobby(userHobb)
-                .uploadPic(picPath + picName)
-                .setAddress(userAdd)
-                .setState(userState)
-                .setCity(userCity)
-                .submitInfo();
+            formPage.setFirstName(userName)
+                    .setLastName(userLastName)
+                    .setEmail(userEmail)
+                    .setGen(userGen)
+                    .setPhone((userPhone))
+                    .setBDay(userBDDay, userBDMonth, userBDYear)
+                    .setSubj(userSubj)
+                    .setHobby(userHobb)
+                    .uploadPic(picPath + picName)
+                    .setAddress(userAdd)
+                    .setState(userState)
+                    .setCity(userCity)
+                    .submitInfo();
         });
 
         step("Check the result", () -> {
-        formPage.checkRegistrResultTabAppear()
-                .checkRegistrResult("Student Name", userName + " " + userLastName)
-                .checkRegistrResult("Student Email", userEmail)
-                .checkRegistrResult("Gender", userGen)
-                .checkRegistrResult("Mobile", userPhone)
-                .checkRegistrResult("Date of Birth", userBDDay + " " + userBDMonth + "," + userBDYear)
-                .checkRegistrResult("Subjects", userSubj)
-                .checkRegistrResult("Hobbies", userHobb)
-                .checkRegistrResult("Picture", picName)
-                .checkRegistrResult("Address", userAdd)
-                .checkRegistrResult("State and City", userState + " " + userCity);
+            formPage.checkRegistrResultTabAppear()
+                    .checkRegistrResult("Student Name", userName + " " + userLastName)
+                    .checkRegistrResult("Student Email", userEmail)
+                    .checkRegistrResult("Gender", userGen)
+                    .checkRegistrResult("Mobile", userPhone)
+                    .checkRegistrResult("Date of Birth", userBDDay + " " + userBDMonth + "," + userBDYear)
+                    .checkRegistrResult("Subjects", userSubj)
+                    .checkRegistrResult("Hobbies", userHobb)
+                    .checkRegistrResult("Picture", picName)
+                    .checkRegistrResult("Address", userAdd)
+                    .checkRegistrResult("State and City", userState + " " + userCity);
         });
     }
 }
