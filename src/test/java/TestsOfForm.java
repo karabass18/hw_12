@@ -1,13 +1,17 @@
 import Pages.FormPage;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.open;
+import static io.qameta.allure.Allure.step;
 
 public class TestsOfForm extends StartsSet {
 
 
     @Test
     void fillFormTest() {
+
         String userName = "Vania";
         String userLastName = "Ivanov";
         String userEmail = "vania@vania.com";
@@ -23,9 +27,16 @@ public class TestsOfForm extends StartsSet {
         String userAdd = "Home Street";
         String userState = "Haryana";
         String userCity = "Karnal";
+        FormPage formPage = new FormPage();
 
-        new FormPage().openForm()
-                .setFirstName(userName)
+
+        step("Open the form", () ->{
+
+        formPage.openForm();
+        });
+
+        step("Fill the form", () -> {
+        formPage.setFirstName(userName)
                 .setLastName(userLastName)
                 .setEmail(userEmail)
                 .setGen(userGen)
@@ -38,9 +49,10 @@ public class TestsOfForm extends StartsSet {
                 .setState(userState)
                 .setCity(userCity)
                 .submitInfo();
+        });
 
-
-        new FormPage().checkRegistrResultTabAppear()
+        step("Check the result", () -> {
+        formPage.checkRegistrResultTabAppear()
                 .checkRegistrResult("Student Name", userName + " " + userLastName)
                 .checkRegistrResult("Student Email", userEmail)
                 .checkRegistrResult("Gender", userGen)
@@ -51,6 +63,6 @@ public class TestsOfForm extends StartsSet {
                 .checkRegistrResult("Picture", picName)
                 .checkRegistrResult("Address", userAdd)
                 .checkRegistrResult("State and City", userState + " " + userCity);
-
+        });
     }
 }
