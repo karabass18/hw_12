@@ -11,18 +11,16 @@ public class StartsSet {
     static void beforeAll() {
 
         //Configuration.holdBrowserOpen = true;
-        //Configuration.browserSize = "720x800";
+
 
         Configuration.remote = System.getProperty("remoteUrl", "https://user1:1234@selenoid.autotests.cloud/wd/hub");
         SelenideLogger.addListener("allure", new AllureSelenide());
 
         Configuration.browserSize = System.getProperty("browserResolution", "720x800");
         String browserFullName = System.getProperty("browserFullName", "chrome:100");
-        //Configuration.browser = browserFullName;
         String[] splitName = browserFullName.split(":");
         Configuration.browser = splitName[0];
         Configuration.browserVersion = splitName[1];
-        //Configuration.browserSize = "720x800";
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("enableVNC", true);
