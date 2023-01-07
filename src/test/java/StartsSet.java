@@ -17,6 +17,7 @@ public class StartsSet {
         SelenideLogger.addListener("allure", new AllureSelenide());
 
         Configuration.browserSize = System.getProperty("browserResolution", "720x800");
+
         //Configuration.browserSize = "720x800";
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
