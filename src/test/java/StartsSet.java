@@ -16,8 +16,8 @@ public class StartsSet {
         Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
         SelenideLogger.addListener("allure", new AllureSelenide());
 
-        Configuration.browserSize = System.getProperty("browserResolution", "1920x1080");
-        Configuration.browserSize = "720x800";
+        Configuration.browserSize = System.getProperty("browserResolution", "720x800");
+        //Configuration.browserSize = "720x800";
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("enableVNC", true);
